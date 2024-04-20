@@ -1,4 +1,4 @@
-import 'package:ai_app/home_page.dart';
+import 'package:ai_app/welcome_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: HomePage(),
+      home: WelcomeScreen(),
     );
   }
 }
