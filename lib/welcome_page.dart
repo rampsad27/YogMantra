@@ -24,13 +24,13 @@ class WelcomeScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               const Positioned(
-                top: 300,
-                left: 60,
+                top: 310,
+                left: 45,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Yog Shakti',
+                      'Yog Mantra',
                       style: TextStyle(
                         fontSize: 44,
                         fontWeight: FontWeight.bold,
@@ -41,8 +41,8 @@ class WelcomeScreen extends StatelessWidget {
                     Text(
                       'Harmony. Empowerment. Serenity',
                       style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 255, 255, 255),
                       ),
                     ),
                   ],
