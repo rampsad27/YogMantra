@@ -5,7 +5,6 @@ class UserData {
   final Level? level;
   final String triggers;
   final CopingMechanism? copingMechanism;
-  final PhysicalSymptoms? physicalSymptoms;
   final TimeAvailability? timeAvailability;
 
   const UserData({
@@ -15,7 +14,6 @@ class UserData {
     this.level,
     required this.triggers,
     this.copingMechanism,
-    this.physicalSymptoms,
     this.timeAvailability,
   });
 }
@@ -59,13 +57,10 @@ enum CopingMechanism {
   Mindfulness,
 }
 
-enum PhysicalSymptoms {
-  hedache,
-  stomachache,
-}
-
 enum TimeAvailability {
-  min,
-  hr,
-  halfhr,
+  FiveMins,
+  TenMins,
+  Halfhr,
+  Onehr,
+  Weekly,
 }

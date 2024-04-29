@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
   final Mood? mood;
   final Level? level;
   final CopingMechanism? copingMechanism;
-  final PhysicalSymptoms? physicalSymptoms;
+
   final TimeAvailability? timeAvailability;
 
   const HomePage({
@@ -18,7 +18,6 @@ class HomePage extends StatefulWidget {
     this.mood,
     this.level,
     this.copingMechanism,
-    this.physicalSymptoms,
     this.timeAvailability,
   }) : super(key: key);
 
@@ -118,7 +117,7 @@ class _HomePageState extends State<HomePage> {
       });
       try {
         final response = await chatSession.sendMessage(Content.text(
-            'Hello ${widget.userData.name}, It\'s okay to feel ${widget.userData.mood} with ${widget.userData.level} at ${widget.userData.age} years old. Remember to cope with your ${widget.userData.triggers}, utilize ${widget.userData.copingMechanism} , manage ${widget.userData.physicalSymptoms}, and make the most of your ${widget.userData.timeAvailability} time. Here\'s a routine suggested:'));
+            'Hello ${widget.userData.name}, It\'s okay to feel ${widget.userData.mood} with ${widget.userData.level} at ${widget.userData.age} years old. Remember to cope with your ${widget.userData.triggers}, utilize ${widget.userData.copingMechanism}, and make the most of your ${widget.userData.timeAvailability} time. Here\'s a routine suggested:'));
 
         if (response.text == null) {
           displayError('No response from API');

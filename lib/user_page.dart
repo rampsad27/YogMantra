@@ -15,7 +15,7 @@ class _UserPageState extends State<UserPage> {
   Mood? selectedMood;
   Level? selectedLevel;
   final triggerController = TextEditingController();
-  PhysicalSymptoms? selectedSymptom;
+
   CopingMechanism? selectedCopingMechanism;
   TimeAvailability? selectedTimeAvailability;
 
@@ -104,28 +104,6 @@ class _UserPageState extends State<UserPage> {
                 ),
               ),
               const SizedBox(height: 10),
-              DropdownButtonFormField<PhysicalSymptoms>(
-                value: selectedSymptom,
-                onChanged: (newValue) {
-                  setState(() {
-                    selectedSymptom = newValue;
-                  });
-                },
-                items: PhysicalSymptoms.values.map((symptom) {
-                  return DropdownMenuItem<PhysicalSymptoms>(
-                    value: symptom,
-                    child: Text(
-                      symptom.toString().split('.').last,
-                      style: const TextStyle(color: Colors.black),
-                    ),
-                  );
-                }).toList(),
-                decoration: const InputDecoration(
-                  labelText: 'Physical Symptoms',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
               DropdownButtonFormField<CopingMechanism>(
                 value: selectedCopingMechanism,
                 onChanged: (newValue) {
@@ -178,7 +156,6 @@ class _UserPageState extends State<UserPage> {
                     mood: selectedMood,
                     level: selectedLevel,
                     triggers: triggerController.text,
-                    physicalSymptoms: selectedSymptom,
                     copingMechanism: selectedCopingMechanism,
                     timeAvailability: selectedTimeAvailability,
                   );
