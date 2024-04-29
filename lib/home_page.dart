@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ToDo', style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color.fromARGB(255, 60, 177, 118),
+        backgroundColor: const Color(0xFF437461),
         elevation: 0, // Remove elevation for a flat design
       ),
       body: Column(
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            color: const Color.fromARGB(255, 60, 177, 118),
+            color: const Color.fromARGB(255, 112, 156, 139),
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: isLoading
                 ? const Center(
@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
       });
       try {
         final response = await chatSession.sendMessage(Content.text(
-            'Hello ${widget.userData.name}, It\'s okay to feel ${widget.userData.mood} with level ${widget.userData.level} at ${widget.userData.age} years old. Remember to cope with your ${widget.userData.triggers}, utilize ${widget.userData.copingMechanism} , manage ${widget.userData.physicalSymptoms}, and make the most of your ${widget.userData.timeAvailability} time. Here\'s a routine I suggest:'));
+            'Hello ${widget.userData.name}, It\'s okay to feel ${widget.userData.mood} with ${widget.userData.level} at ${widget.userData.age} years old. Remember to cope with your ${widget.userData.triggers}, utilize ${widget.userData.copingMechanism} , manage ${widget.userData.physicalSymptoms}, and make the most of your ${widget.userData.timeAvailability} time. Here\'s a routine suggested:'));
 
         if (response.text == null) {
           displayError('No response from API');

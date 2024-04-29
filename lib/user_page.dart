@@ -27,7 +27,7 @@ class _UserPageState extends State<UserPage> {
           'User Data',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color.fromARGB(255, 32, 89, 60),
+        backgroundColor: const Color(0xFF437461),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -190,7 +190,7 @@ class _UserPageState extends State<UserPage> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 60, 177, 118),
+                  backgroundColor: const Color(0xFF437461),
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                 ),
                 child: const Text(
