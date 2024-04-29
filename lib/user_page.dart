@@ -12,15 +12,12 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   final nameController = TextEditingController();
   final ageController = TextEditingController();
-  Mood? selectedMood; // Changed to hold selected mood
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    ageController.dispose();
-
-    super.dispose();
-  }
+  Mood? selectedMood;
+  Level? selectedLevel;
+  final triggerController = TextEditingController();
+  PhysicalSymptoms? selectedSymptom;
+  CopingMechanism? selectedCopingMechanism;
+  TimeAvailability? selectedTimeAvailability;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +27,7 @@ class _UserPageState extends State<UserPage> {
           'User Data',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color.fromARGB(255, 60, 177, 118),
+        backgroundColor: const Color.fromARGB(255, 32, 89, 60),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -76,24 +73,119 @@ class _UserPageState extends State<UserPage> {
                   border: OutlineInputBorder(),
                 ),
               ),
+              const SizedBox(height: 10),
+              DropdownButtonFormField<Level>(
+                value: selectedLevel,
+                onChanged: (newValue) {
+                  setState(() {
+                    selectedLevel = newValue;
+                  });
+                },
+                items: Level.values.map((level) {
+                  return DropdownMenuItem<Level>(
+                    value: level,
+                    child: Text(
+                      level.toString().split('.').last,
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(
+                  labelText: 'Level',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: triggerController,
+                decoration: const InputDecoration(
+                  labelText: 'Trigger',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 10),
+              DropdownButtonFormField<PhysicalSymptoms>(
+                value: selectedSymptom,
+                onChanged: (newValue) {
+                  setState(() {
+                    selectedSymptom = newValue;
+                  });
+                },
+                items: PhysicalSymptoms.values.map((symptom) {
+                  return DropdownMenuItem<PhysicalSymptoms>(
+                    value: symptom,
+                    child: Text(
+                      symptom.toString().split('.').last,
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(
+                  labelText: 'Physical Symptoms',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 10),
+              DropdownButtonFormField<CopingMechanism>(
+                value: selectedCopingMechanism,
+                onChanged: (newValue) {
+                  setState(() {
+                    selectedCopingMechanism = newValue;
+                  });
+                },
+                items: CopingMechanism.values.map((copingMechanism) {
+                  return DropdownMenuItem<CopingMechanism>(
+                    value: copingMechanism,
+                    child: Text(
+                      copingMechanism.toString().split('.').last,
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(
+                  labelText: 'Coping Mechanism',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 10),
+              DropdownButtonFormField<TimeAvailability>(
+                value: selectedTimeAvailability,
+                onChanged: (newValue) {
+                  setState(() {
+                    selectedTimeAvailability = newValue;
+                  });
+                },
+                items: TimeAvailability.values.map((time) {
+                  return DropdownMenuItem<TimeAvailability>(
+                    value: time,
+                    child: Text(
+                      time.toString().split('.').last,
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  );
+                }).toList(),
+                decoration: const InputDecoration(
+                  labelText: 'Time Availability',
+                  border: OutlineInputBorder(),
+                ),
+              ),
               const SizedBox(height: 32),
               ElevatedButton(
                 onPressed: () {
                   final userData = UserData(
                     name: nameController.text,
                     age: ageController.text,
-                    mood: selectedMood, // Assign selected mood
-                    healthHistory: '',
-                    allergies: '',
-                    activityLevel: null,
-                    goal: null,
-                    budget: '',
+                    mood: selectedMood,
+                    level: selectedLevel,
+                    triggers: triggerController.text,
+                    physicalSymptoms: selectedSymptom,
+                    copingMechanism: selectedCopingMechanism,
+                    timeAvailability: selectedTimeAvailability,
                   );
 
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) =>
-                          HealthHistoryPage(userData: userData),
+                      builder: (context) => HomePage(userData: userData),
                     ),
                   );
                 },
@@ -112,192 +204,4 @@ class _UserPageState extends State<UserPage> {
       ),
     );
   }
-}
-
-class HealthHistoryPage extends StatefulWidget {
-  final UserData userData;
-
-  const HealthHistoryPage({Key? key, required this.userData}) : super(key: key);
-
-  @override
-  State<HealthHistoryPage> createState() => _HealthHistoryPageState();
-}
-
-class _HealthHistoryPageState extends State<HealthHistoryPage> {
-  final healthHistoryController = TextEditingController();
-  final allergiesController = TextEditingController();
-  ActivityLevel? selectedActivityLevel;
-  Goal? selectedGoal;
-  String? selectedCurrency;
-  final budgetController = TextEditingController(); // Added budgetController
-
-  @override
-  void initState() {
-    super.initState();
-    selectedActivityLevel = widget.userData.activityLevel;
-    selectedGoal = widget.userData.goal;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'User Data',
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: const Color.fromARGB(255, 60, 177, 118),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextField(
-                controller: healthHistoryController,
-                decoration: const InputDecoration(
-                  labelText: 'Medical History',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: allergiesController,
-                decoration: const InputDecoration(
-                  labelText: 'Dietary Restrictions/Allergies',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              DropdownButtonFormField<ActivityLevel>(
-                value: selectedActivityLevel,
-                onChanged: (newValue) {
-                  setState(() {
-                    selectedActivityLevel = newValue;
-                  });
-                },
-                items: ActivityLevel.values.map((level) {
-                  return DropdownMenuItem<ActivityLevel>(
-                    value: level,
-                    child: Text(
-                      level.toString().split('.').last,
-                      style: const TextStyle(color: Colors.black),
-                    ),
-                  );
-                }).toList(),
-                decoration: const InputDecoration(
-                  labelText: 'Activity Level',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              DropdownButtonFormField<Goal>(
-                value: selectedGoal,
-                onChanged: (newValue) {
-                  setState(() {
-                    selectedGoal = newValue;
-                  });
-                },
-                items: Goal.values.map((goal) {
-                  return DropdownMenuItem<Goal>(
-                    value: goal,
-                    child: Text(
-                      goal.toString().split('.').last,
-                      style: const TextStyle(color: Colors.black),
-                    ),
-                  );
-                }).toList(),
-                decoration: const InputDecoration(
-                  labelText: 'Goal',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: budgetController,
-                      decoration: const InputDecoration(
-                        labelText: 'Weekly Food Budget',
-                        border: OutlineInputBorder(),
-                      ),
-                      keyboardType: TextInputType.number,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  DropdownButton<String>(
-                    value: selectedCurrency,
-                    onChanged: (newValue) {
-                      setState(() {
-                        selectedCurrency = newValue;
-                      });
-                    },
-                    items: ['USD', 'EUR', 'GBP', 'JPY', 'KRW', 'INR']
-                        .map<DropdownMenuItem<String>>((currency) {
-                      return DropdownMenuItem<String>(
-                        value: currency,
-                        child: Text(currency),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 32),
-              ElevatedButton(
-                onPressed: () {
-                  final healthHistory = healthHistoryController.text;
-                  final allergies = allergiesController.text;
-
-                  final updatedUserData = UserData(
-                    name: widget.userData.name,
-                    age: widget.userData.age,
-                    mood: widget.userData.mood,
-                    healthHistory: healthHistory,
-                    allergies: allergies,
-                    activityLevel: selectedActivityLevel,
-                    goal: selectedGoal,
-                    budget: budgetController.text,
-                  );
-
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(
-                        userData: updatedUserData,
-                        activityLevel: selectedActivityLevel,
-                        goal: selectedGoal,
-                        budget: Budget(
-                          amount: budgetController.text,
-                          currency: selectedCurrency ?? 'USD',
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 60, 177, 118),
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                ),
-                child: const Text(
-                  'Save',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class Budget {
-  final String amount;
-  final String currency;
-
-  Budget({
-    required this.amount,
-    required this.currency,
-  });
 }

@@ -1,4 +1,3 @@
-import 'package:ai_app/user_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
@@ -7,16 +6,20 @@ import 'package:ai_app/data.dart';
 
 class HomePage extends StatefulWidget {
   final UserData userData;
-  final ActivityLevel? activityLevel;
-  final Goal? goal;
-  final Budget? budget;
+  final Mood? mood;
+  final Level? level;
+  final CopingMechanism? copingMechanism;
+  final PhysicalSymptoms? physicalSymptoms;
+  final TimeAvailability? timeAvailability;
 
   const HomePage({
     Key? key,
     required this.userData,
-    this.activityLevel,
-    this.goal,
-    this.budget,
+    this.mood,
+    this.level,
+    this.copingMechanism,
+    this.physicalSymptoms,
+    this.timeAvailability,
   }) : super(key: key);
 
   @override
@@ -42,7 +45,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Diet Plan', style: TextStyle(color: Colors.white)),
+        title: const Text('ToDo', style: TextStyle(color: Colors.white)),
         backgroundColor: const Color.fromARGB(255, 60, 177, 118),
         elevation: 0, // Remove elevation for a flat design
       ),
@@ -109,14 +112,13 @@ class _HomePageState extends State<HomePage> {
   void sendUserMessage() async {
     if (widget.userData.name.isNotEmpty &&
         widget.userData.age.isNotEmpty &&
-        widget.userData.healthHistory.isNotEmpty &&
-        widget.userData.allergies.isNotEmpty) {
+        widget.userData.triggers.isNotEmpty) {
       setState(() {
         isLoading = true;
       });
       try {
         final response = await chatSession.sendMessage(Content.text(
-            'Hello ${widget.userData.name}, I hope you\'re having a wonderful day'));
+            'Hello ${widget.userData.name}, It\'s okay to feel ${widget.userData.mood} with level ${widget.userData.level} at ${widget.userData.age} years old. Remember to cope with your ${widget.userData.triggers}, utilize ${widget.userData.copingMechanism} , manage ${widget.userData.physicalSymptoms}, and make the most of your ${widget.userData.timeAvailability} time. Here\'s a routine I suggest:'));
 
         if (response.text == null) {
           displayError('No response from API');

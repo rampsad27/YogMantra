@@ -2,42 +2,49 @@ class UserData {
   final String name;
   final String age;
   final Mood? mood;
-  final String healthHistory;
-  final String allergies;
-  final ActivityLevel? activityLevel;
-  final Goal? goal;
-  final String budget;
+  final Level? level;
+  final String triggers;
+  final CopingMechanism? copingMechanism;
+  final PhysicalSymptoms? physicalSymptoms;
+  final TimeAvailability? timeAvailability;
 
   const UserData({
     required this.name,
     required this.age,
     this.mood,
-    required this.healthHistory,
-    required this.allergies,
-    this.activityLevel,
-    this.goal,
-    required this.budget,
+    this.level,
+    required this.triggers,
+    this.copingMechanism,
+    this.physicalSymptoms,
+    this.timeAvailability,
   });
-}
-
-enum Goal {
-  WeightLoss,
-  MuscleGain,
-  GeneralHealth,
-}
-
-enum ActivityLevel {
-  Sedentary,
-  LightlyActive,
-  ModeratelyActive,
-  VeryActive,
-  ExtremelyActive,
 }
 
 enum Mood {
   Sad,
   Anxious,
-  Horny,
-  Thirsty,
-  Happy,
+}
+
+enum Level {
+  low,
+  med,
+  high,
+}
+
+enum CopingMechanism {
+  exercise,
+  talk,
+  breathing,
+  yoga,
+}
+
+enum PhysicalSymptoms {
+  hedache,
+  stomachache,
+}
+
+enum TimeAvailability {
+  min,
+  hr,
+  halfhr,
 }
