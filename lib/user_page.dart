@@ -69,7 +69,7 @@ class _UserPageState extends State<UserPage> {
                   );
                 }).toList(),
                 decoration: const InputDecoration(
-                  labelText: 'Current Mood',
+                  labelText: 'How are you feeling?',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -91,7 +91,7 @@ class _UserPageState extends State<UserPage> {
                   );
                 }).toList(),
                 decoration: const InputDecoration(
-                  labelText: 'Level',
+                  labelText: 'Intensity',
                   border: OutlineInputBorder(),
                 ),
               ),

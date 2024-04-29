@@ -23,19 +23,40 @@ class UserData {
 enum Mood {
   Sad,
   Anxious,
+  Anger,
+  Depression,
+  Lonely,
+  Frustated,
+  Guilt,
+  Stress,
+  Confusion,
+  Exhaustion,
+  Insecure,
+  Jealous,
+  Overwhelmed,
+  Grief,
+  Regret,
+  Envy,
+  Despair,
+  Apathy,
+  Paranoia,
+  Disgust,
 }
 
 enum Level {
-  low,
-  med,
-  high,
+  Subdued,
+  Moderate,
+  High,
 }
 
 enum CopingMechanism {
-  exercise,
-  talk,
-  breathing,
-  yoga,
+  Exercise,
+  Talking,
+  Breathing,
+  Yoga,
+  Journaling,
+  Meditation,
+  Mindfulness,
 }
 
 enum PhysicalSymptoms {
