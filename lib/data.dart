@@ -1,29 +1,21 @@
 class UserData {
   final String name;
   final String age;
-  final String height;
-  final String weight;
-  final String gender;
-  final String country;
+  final Mood? mood;
   final String healthHistory;
   final String allergies;
   final ActivityLevel? activityLevel;
   final Goal? goal;
-  final String ethnicity;
   final String budget;
 
   const UserData({
     required this.name,
     required this.age,
-    required this.height,
-    required this.weight,
-    required this.gender,
-    required this.country,
+    this.mood,
     required this.healthHistory,
     required this.allergies,
     this.activityLevel,
     this.goal,
-    required this.ethnicity,
     required this.budget,
   });
 }
@@ -40,4 +32,12 @@ enum ActivityLevel {
   ModeratelyActive,
   VeryActive,
   ExtremelyActive,
+}
+
+enum Mood {
+  Sad,
+  Anxious,
+  Horny,
+  Thirsty,
+  Happy,
 }

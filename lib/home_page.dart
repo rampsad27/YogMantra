@@ -109,21 +109,14 @@ class _HomePageState extends State<HomePage> {
   void sendUserMessage() async {
     if (widget.userData.name.isNotEmpty &&
         widget.userData.age.isNotEmpty &&
-        widget.userData.height.isNotEmpty &&
-        widget.userData.weight.isNotEmpty &&
-        widget.userData.gender.isNotEmpty &&
-        widget.userData.country.isNotEmpty &&
         widget.userData.healthHistory.isNotEmpty &&
         widget.userData.allergies.isNotEmpty) {
       setState(() {
         isLoading = true;
       });
       try {
-        final response = await chatSession.sendMessage(
-          Content.text(
-            'Hello ${widget.userData.name}, I hope you\'re having a wonderful day. Based on your profile, here is your personalized meal plan for the week: As a ${widget.userData.age}-year-old ${widget.userData.gender.toLowerCase()}, standing at ${widget.userData.height} cm tall, and weighing ${widget.userData.weight} kg, with ${widget.userData.ethnicity} heritage, residing in ${widget.userData.country}, I\'ve curated a meal plan tailored to your lifestyle and dietary needs. Considering your ${widget.userData.activityLevel} and health history (${widget.userData.healthHistory}), as well as your allergic to ${widget.userData.allergies}, I\'ve designed a meal plan that aligns with your goals (${widget.userData.goal}) and budget (${widget.budget?.amount} ${widget.budget?.currency}). Enjoy your meals!',
-          ),
-        );
+        final response = await chatSession.sendMessage(Content.text(
+            'Hello ${widget.userData.name}, I hope you\'re having a wonderful day'));
 
         if (response.text == null) {
           displayError('No response from API');

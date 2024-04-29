@@ -12,21 +12,13 @@ class UserPage extends StatefulWidget {
 class _UserPageState extends State<UserPage> {
   final nameController = TextEditingController();
   final ageController = TextEditingController();
-  final heightController = TextEditingController();
-  final weightController = TextEditingController();
-  final genderController = TextEditingController();
-  final countryController = TextEditingController();
-  final ethnicityController = TextEditingController();
+  Mood? selectedMood; // Changed to hold selected mood
 
   @override
   void dispose() {
     nameController.dispose();
     ageController.dispose();
-    heightController.dispose();
-    weightController.dispose();
-    genderController.dispose();
-    countryController.dispose();
-    ethnicityController.dispose();
+
     super.dispose();
   }
 
@@ -63,44 +55,24 @@ class _UserPageState extends State<UserPage> {
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 10),
-              TextField(
-                controller: heightController,
+              DropdownButtonFormField<Mood>(
+                value: selectedMood,
+                onChanged: (newValue) {
+                  setState(() {
+                    selectedMood = newValue;
+                  });
+                },
+                items: Mood.values.map((mood) {
+                  return DropdownMenuItem<Mood>(
+                    value: mood,
+                    child: Text(
+                      mood.toString().split('.').last,
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  );
+                }).toList(),
                 decoration: const InputDecoration(
-                  labelText: 'Height (cm)',
-                  border: OutlineInputBorder(),
-                ),
-                keyboardType: TextInputType.number,
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: weightController,
-                decoration: const InputDecoration(
-                  labelText: 'Weight (kg)',
-                  border: OutlineInputBorder(),
-                ),
-                keyboardType: TextInputType.number,
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: genderController,
-                decoration: const InputDecoration(
-                  labelText: 'Gender',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: countryController,
-                decoration: const InputDecoration(
-                  labelText: 'Country',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: ethnicityController,
-                decoration: const InputDecoration(
-                  labelText: 'Cultural Background',
+                  labelText: 'Current Mood',
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -110,11 +82,7 @@ class _UserPageState extends State<UserPage> {
                   final userData = UserData(
                     name: nameController.text,
                     age: ageController.text,
-                    height: heightController.text,
-                    weight: weightController.text,
-                    gender: genderController.text,
-                    country: countryController.text,
-                    ethnicity: ethnicityController.text,
+                    mood: selectedMood, // Assign selected mood
                     healthHistory: '',
                     allergies: '',
                     activityLevel: null,
@@ -285,17 +253,12 @@ class _HealthHistoryPageState extends State<HealthHistoryPage> {
                   final updatedUserData = UserData(
                     name: widget.userData.name,
                     age: widget.userData.age,
-                    height: widget.userData.height,
-                    weight: widget.userData.weight,
-                    gender: widget.userData.gender,
-                    country: widget.userData.country,
-                    ethnicity: widget.userData.ethnicity,
+                    mood: widget.userData.mood,
                     healthHistory: healthHistory,
                     allergies: allergies,
                     activityLevel: selectedActivityLevel,
                     goal: selectedGoal,
-                    budget: budgetController
-                        .text, // Pass the budget amount as a String
+                    budget: budgetController.text,
                   );
 
                   Navigator.of(context).push(

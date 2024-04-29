@@ -39,7 +39,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'Harmony. Empowerment. Serenity',
+                      'Your Mental Health Companion',
                       style: TextStyle(
                         fontSize: 20,
                         color: Color.fromARGB(255, 255, 255, 255),
